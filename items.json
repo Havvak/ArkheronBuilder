@@ -1,0 +1,398 @@
+﻿[
+    {
+        "id":  "ux_image_itempickup_e00_abyssal_backing",
+        "name":  "UX Image ItemPickup E00 Abyssal Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E00_Abyssal_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_amulet_barrage",
+        "name":  "UX Image ItemPickup E00 Amulet Barrage",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E00_Amulet_Barrage.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_amulet_cluster",
+        "name":  "UX Image ItemPickup E00 Amulet Cluster",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E00_Amulet_Cluster.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_amulet_shield",
+        "name":  "UX Image ItemPickup E00 Amulet Shield",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E00_Amulet_Shield.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_amulet_slide",
+        "name":  "UX Image ItemPickup E00 Amulet Slide",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E00_Amulet_Slide.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_crown_essence",
+        "name":  "UX Image ItemPickup E00 Crown Essence",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E00_Crown_Essence.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_crown_fortitude",
+        "name":  "UX Image ItemPickup E00 Crown Fortitude",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E00_Crown_Fortitude.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_crown_reset",
+        "name":  "UX Image ItemPickup E00 Crown Reset",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E00_Crown_Reset.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_crown_resilience",
+        "name":  "UX Image ItemPickup E00 Crown Resilience",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E00_Crown_Resilience.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_crown_steadfast",
+        "name":  "UX Image ItemPickup E00 Crown Steadfast",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E00_Crown_Steadfast.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_weapon_bashingshield",
+        "name":  "UX Image ItemPickup E00 Weapon BashingShield",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E00_Weapon_BashingShield.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_weapon_dualaxes",
+        "name":  "UX Image ItemPickup E00 Weapon DualAxes",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E00_Weapon_DualAxes.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_weapon_greatsword",
+        "name":  "UX Image ItemPickup E00 Weapon Greatsword",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E00_Weapon_Greatsword.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_weapon_longbow",
+        "name":  "UX Image ItemPickup E00 Weapon Longbow",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E00_Weapon_Longbow.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_weapon_scimitar",
+        "name":  "UX Image ItemPickup E00 Weapon Scimitar",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E00_Weapon_Scimitar.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e00_weapon_shuriken",
+        "name":  "UX Image ItemPickup E00 Weapon Shuriken",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E00_Weapon_Shuriken.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e01_amulet",
+        "name":  "UX Image ItemPickup E01 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E01_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e01_crown",
+        "name":  "UX Image ItemPickup E01 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E01_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e01_dahla_backing",
+        "name":  "UX Image ItemPickup E01 Dahla Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E01_Dahla_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e01_weapon_knives",
+        "name":  "UX Image ItemPickup E01 Weapon Knives",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E01_Weapon_Knives.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e01_weapon_sword",
+        "name":  "UX Image ItemPickup E01 Weapon Sword",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E01_Weapon_Sword.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e02_amulet",
+        "name":  "UX Image ItemPickup E02 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E02_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e02_crown",
+        "name":  "UX Image ItemPickup E02 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E02_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e02_irenna_backing",
+        "name":  "UX Image ItemPickup E02 Irenna Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E02_Irenna_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e02_weapon_mace",
+        "name":  "UX Image ItemPickup E02 Weapon Mace",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E02_Weapon_Mace.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e02_weapon_sword",
+        "name":  "UX Image ItemPickup E02 Weapon Sword",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E02_Weapon_Sword.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e03_amulet",
+        "name":  "UX Image ItemPickup E03 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E03_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e03_crown",
+        "name":  "UX Image ItemPickup E03 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E03_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e03_edani_backing",
+        "name":  "UX Image ItemPickup E03 Edani Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E03_Edani_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e03_weapon_claws",
+        "name":  "UX Image ItemPickup E03 Weapon Claws",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E03_Weapon_Claws.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e03_weapon_hook",
+        "name":  "UX Image ItemPickup E03 Weapon Hook",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E03_Weapon_Hook.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e04_amulet",
+        "name":  "UX Image ItemPickup E04 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E04_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e04_crown",
+        "name":  "UX Image ItemPickup E04 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E04_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e04_ravah_backing",
+        "name":  "UX Image ItemPickup E04 Ravah Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E04_Ravah_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e04_weapon_crossbow",
+        "name":  "UX Image ItemPickup E04 Weapon Crossbow",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E04_Weapon_Crossbow.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e04_weapon_ringblade",
+        "name":  "UX Image ItemPickup E04 Weapon Ringblade",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E04_Weapon_Ringblade.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e05_amulet",
+        "name":  "UX Image ItemPickup E05 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E05_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e05_crown",
+        "name":  "UX Image ItemPickup E05 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E05_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e05_hollow_backing",
+        "name":  "UX Image ItemPickup E05 Hollow Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E05_Hollow_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e05_weapon_pet",
+        "name":  "UX Image ItemPickup E05 Weapon Pet",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E05_Weapon_Pet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e05_weapon_staff",
+        "name":  "UX Image ItemPickup E05 Weapon Staff",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E05_Weapon_Staff.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e06_amulet",
+        "name":  "UX Image ItemPickup E06 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E06_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e06_crown",
+        "name":  "UX Image ItemPickup E06 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E06_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e06_kassan_backing",
+        "name":  "UX Image ItemPickup E06 Kassan Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E06_Kassan_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e06_weapon_lantern",
+        "name":  "UX Image ItemPickup E06 Weapon Lantern",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E06_Weapon_Lantern.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e06_weapon_shovel",
+        "name":  "UX Image ItemPickup E06 Weapon Shovel",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E06_Weapon_Shovel.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e07_amulet",
+        "name":  "UX Image ItemPickup E07 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E07_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e07_crown",
+        "name":  "UX Image ItemPickup E07 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E07_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e07_leodin_backing",
+        "name":  "UX Image ItemPickup E07 Leodin Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E07_Leodin_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e07_weapon_hammer",
+        "name":  "UX Image ItemPickup E07 Weapon Hammer",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E07_Weapon_Hammer.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e07_weapon_spear",
+        "name":  "UX Image ItemPickup E07 Weapon Spear",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E07_Weapon_Spear.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e08_amulet",
+        "name":  "UX Image ItemPickup E08 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E08_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e08_crown",
+        "name":  "UX Image ItemPickup E08 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E08_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e08_rynshi_backing",
+        "name":  "UX Image ItemPickup E08 Rynshi Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E08_Rynshi_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e08_weapon_cleaver",
+        "name":  "UX Image ItemPickup E08 Weapon Cleaver",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E08_Weapon_Cleaver.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e08_weapon_fists",
+        "name":  "UX Image ItemPickup E08 Weapon Fists",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E08_Weapon_Fists.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e09_amulet",
+        "name":  "UX Image ItemPickup E09 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E09_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e09_crown",
+        "name":  "UX Image ItemPickup E09 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E09_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e09_vaton_backing",
+        "name":  "UX Image ItemPickup E09 Vaton Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E09_Vaton_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e09_weapon_orb",
+        "name":  "UX Image ItemPickup E09 Weapon Orb",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E09_Weapon_Orb.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e09_weapon_staff",
+        "name":  "UX Image ItemPickup E09 Weapon Staff",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E09_Weapon_Staff.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e10_amulet",
+        "name":  "UX Image ItemPickup E10 Amulet",
+        "type":  "amulet",
+        "file":  "UX_Image_ItemPickup_E10_Amulet.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e10_crown",
+        "name":  "UX Image ItemPickup E10 Crown",
+        "type":  "crown",
+        "file":  "UX_Image_ItemPickup_E10_Crown.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e10_grimwold_backing",
+        "name":  "UX Image ItemPickup E10 Grimwold Backing",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E10_Grimwold_Backing.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e10_weapon_device",
+        "name":  "UX Image ItemPickup E10 Weapon Device",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E10_Weapon_Device.png"
+    },
+    {
+        "id":  "ux_image_itempickup_e10_weapon_rings",
+        "name":  "UX Image ItemPickup E10 Weapon Rings",
+        "type":  "weapon",
+        "file":  "UX_Image_ItemPickup_E10_Weapon_Rings.png"
+    }
+]

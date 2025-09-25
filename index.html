@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arkheron Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0e0f12;
+        --panel: #171a20;
+        --panel-2: #1e222b;
+        --text: #e6e9ef;
+        --muted: #9aa4b2;
+        --accent: #8ab4ff;
+        --accent-2: #b388ff;
+        --danger: #ff6b6b;
+        --slot: #202631;
+        --slot-border: #2b3442;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 800px at 20% 0%, #12141a 0%, var(--bg) 60%);
+        color: var(--text);
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 340px 1fr 380px;
+        gap: 16px;
+        padding: 16px;
+        min-height: 100vh;
+      }
+      .panel {
+        background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+        border: 1px solid #262a33;
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
+      }
+      .panel h2 { margin: 0 0 12px; font-size: 16px; letter-spacing: 0.2px; color: var(--muted); font-weight: 600; }
+
+      .slots {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .slot {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 8px;
+        background: var(--slot);
+        border: 1px solid var(--slot-border);
+        border-radius: 12px;
+        padding: 10px;
+        min-height: 120px;
+      }
+      .slot-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+      .slot-body {
+        display: grid;
+        place-items: center;
+        border: 1px dashed #364156;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.02);
+        cursor: pointer;
+        transition: background 120ms ease, border-color 120ms ease;
+        user-select: none;
+      }
+      .slot-body:hover { background: rgba(255,255,255,0.04); border-color: #40506a; }
+      .slot-empty { color: #5f6b7c; font-size: 12px; }
+      .slot.compatible .slot-body { border-color: var(--accent); background: rgba(138,180,255,0.06); box-shadow: 0 0 0 2px rgba(138,180,255,0.12) inset; }
+
+      .item-chip {
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        background: #232a36;
+        border: 1px solid #2d3646;
+        border-radius: 10px;
+        min-width: 0;
+        width: 100%;
+      }
+      .item-chip img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+      .item-name { font-weight: 600; font-size: 14px; }
+      .item-type { color: var(--muted); font-size: 12px; }
+      .remove { color: var(--danger); font-size: 12px; padding: 4px 8px; border-radius: 8px; border: 1px solid #3a2a2a; background: #2a1f1f; }
+
+      .catalog { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .catalog .item-card {
+        display: grid; grid-template-columns: 48px 1fr; gap: 10px;
+        background: #1c222d; border: 1px solid #2a313f; border-radius: 12px; padding: 10px;
+        cursor: pointer; transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+      }
+      .catalog .item-card:hover { transform: translateY(-1px); border-color: #364156; background: #202736; }
+      .catalog img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
+      .item-meta { display: flex; flex-direction: column; gap: 2px; }
+      .filters { display: flex; gap: 8px; margin-bottom: 10px; }
+      .filter-btn { padding: 6px 10px; border-radius: 8px; border: 1px solid #2a313f; background: #1c222d; color: var(--text); font-size: 12px; cursor: pointer; }
+      .filter-btn[aria-pressed="true"] { border-color: var(--accent); background: #0f1b33; }
+      .import { display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+      .import input[type="file"] { display:none; }
+      .import .path { color: var(--muted); font-size: 12px; }
+
+      .help { color: var(--muted); font-size: 12px; }
+      .footer { margin-top: 8px; color: var(--muted); font-size: 12px; text-align: center; }
+
+      @media (max-width: 1000px) {
+        .app { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const { useMemo, useState } = React;
+
+      const SLOT_TYPES = {
+        crown: { id: 'crown', label: 'Crown' },
+        amulet: { id: 'amulet', label: 'Amulet' },
+        weapon1: { id: 'weapon1', label: 'Weapon 1' },
+        weapon2: { id: 'weapon2', label: 'Weapon 2' },
+      };
+
+      const DEFAULT_ITEMS = [
+        { id: 'crown-azure', name: 'Azure Diadem', type: 'crown', img: 'https://images.unsplash.com/photo-1610395219791-1db50f4a04f1?q=80&w=256&auto=format&fit=crop' },
+        { id: 'crown-thorn', name: 'Thorned Coronet', type: 'crown', img: 'https://images.unsplash.com/photo-1610395219219-f8f1cf9faee0?q=80&w=256&auto=format&fit=crop' },
+        { id: 'amulet-sigil', name: 'Sigil of Dawn', type: 'amulet', img: 'https://images.unsplash.com/photo-1617093727343-3747132afd12?q=80&w=256&auto=format&fit=crop' },
+        { id: 'amulet-ember', name: 'Ember Talisman', type: 'amulet', img: 'https://images.unsplash.com/photo-1617191518303-c8f3429e39dc?q=80&w=256&auto=format&fit=crop' },
+        { id: 'blade-oath', name: 'Oathblade', type: 'weapon', img: 'https://images.unsplash.com/photo-1549888834-3ec93abae044?q=80&w=256&auto=format&fit=crop' },
+        { id: 'axe-frost', name: 'Frostcleaver', type: 'weapon', img: 'https://images.unsplash.com/photo-1603415526960-f7e0328d14e5?q=80&w=256&auto=format&fit=crop' },
+        { id: 'bow-tempest', name: 'Tempest Bow', type: 'weapon', img: 'https://images.unsplash.com/photo-1619034005683-f1500d2c7460?q=80&w=256&auto=format&fit=crop' },
+      ];
+
+      function SmartImage({ item, size = 48, radius = 8 }) {
+        const fallbacks = useMemo(() => {
+          const dirs = ['images', 'Images', 'assets', 'Assets'];
+          const exts = ['png', 'jpg', 'jpeg', 'webp', 'avif', 'PNG', 'JPG', 'JPEG', 'WEBP', 'AVIF'];
+          const fromItemFile = item.file ? dirs.flatMap((d) => [`${d}/${item.file}`]) : [];
+          const fromId = dirs.flatMap((d) => exts.map((ext) => `${d}/${item.id}.${ext}`));
+          const remote = item.img ? [item.img] : [];
+          const fileUrl = item.fileUrl ? [item.fileUrl] : [];
+          return [...fileUrl, ...fromItemFile, ...fromId, ...remote];
+        }, [item]);
+        const [index, setIndex] = useState(0);
+        const src = fallbacks[Math.min(index, fallbacks.length - 1)];
+        return (
+          <img
+            src={src}
+            alt=""
+            width={size}
+            height={size}
+            style={{ width: size, height: size, borderRadius: radius, objectFit: 'cover' }}
+            onError={() => {
+              const next = index + 1;
+              if (next < fallbacks.length) {
+                // Simple diagnostic to help trace missing paths during development
+                console.warn('Image not found, trying next candidate', { tried: src, next: fallbacks[next] });
+                setIndex(next);
+              }
+            }}
+          />
+        );
+      }
+
+      function useLoadoutState() {
+        const [slots, setSlots] = useState({ crown: null, amulet: null, weapon1: null, weapon2: null });
+
+        const addItem = (item) => {
+          setSlots((prev) => {
+            if (item.type === 'crown') return { ...prev, crown: item };
+            if (item.type === 'amulet') return { ...prev, amulet: item };
+            if (item.type === 'weapon') {
+              // Place into first empty weapon slot, else replace weapon1
+              if (!prev.weapon1) return { ...prev, weapon1: item };
+              if (!prev.weapon2) return { ...prev, weapon2: item };
+              return { ...prev, weapon1: item };
+            }
+            return prev;
+          });
+        };
+
+        const setSlot = (slotId, item) => {
+          setSlots((prev) => ({ ...prev, [slotId]: item }));
+        };
+
+        const clearSlot = (slotId) => setSlot(slotId, null);
+
+        return { slots, addItem, setSlot, clearSlot };
+      }
+
+      function Slot({ slotId, label, item, onClear, isCompatible }) {
+        const isEmpty = !item;
+        return (
+          <div className={"slot" + (isCompatible ? " compatible" : "")} aria-live="polite">
+            <div className="slot-header">
+              <span>Slot</span>
+              <strong>{label}</strong>
+            </div>
+            <div
+              className="slot-body"
+              role="button"
+              tabIndex={0}
+              aria-label={isEmpty ? `${label} empty` : `${label} occupied by ${item.name}. Click to remove`}
+              onClick={() => !isEmpty && onClear(slotId)}
+              onKeyDown={(e) => {
+                if ((e.key === 'Enter' || e.key === ' ') && !isEmpty) onClear(slotId);
+              }}
+            >
+              {isEmpty ? (
+                <div className="slot-empty">Empty</div>
+              ) : (
+                <div className="item-chip">
+                  <SmartImage item={item} size={40} radius={8} />
+                  <div>
+                    <div className="item-name">{item.name}</div>
+                    <div className="item-type">{item.type}</div>
+                  </div>
+                  <span className="remove">Remove</span>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      function Catalog({ items, filter, setFilter, onPick, onHoverType }) {
+        const visible = useMemo(() => {
+          if (filter === 'all') return items;
+          if (filter === 'weapons') return items.filter((i) => i.type === 'weapon');
+          return items.filter((i) => i.type === filter);
+        }, [items, filter]);
+
+        return (
+          <div>
+            <div className="filters" role="toolbar" aria-label="Filters">
+              {['all','crown','amulet','weapons'].map((f) => (
+                <button key={f} className="filter-btn" aria-pressed={filter===f} onClick={() => setFilter(f)}>
+                  {f.charAt(0).toUpperCase()+f.slice(1)}
+                </button>
+              ))}
+            </div>
+            <div className="catalog">
+              {visible.map((item) => (
+                <div
+                  key={item.id}
+                  className="item-card"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => onPick(item)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onPick(item); }}
+                  onMouseEnter={() => onHoverType(item.type)}
+                  onMouseLeave={() => onHoverType(null)}
+                >
+                  <SmartImage item={item} size={48} radius={8} />
+                  <div className="item-meta">
+                    <div className="item-name">{item.name}</div>
+                    <div className="item-type">{item.type}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="help" style={{marginTop: 8}}>Click an item to add it to a compatible slot. Clicking a filled slot removes the item.</div>
+          </div>
+        );
+      }
+
+      function App() {
+        const { slots, addItem, clearSlot, setSlot } = useLoadoutState();
+        const [filter, setFilter] = useState('all');
+        const [hoveredType, setHoveredType] = useState(null);
+        const [items, setItems] = useState(DEFAULT_ITEMS);
+        const [manifestLoaded, setManifestLoaded] = useState(false);
+        const [importPath, setImportPath] = useState('');
+
+        React.useEffect(() => {
+          // Try loading manifest; this may fail under file:// in some browsers
+          const controller = new AbortController();
+          fetch('items.json', { signal: controller.signal })
+            .then((r) => (r.ok ? r.json() : Promise.reject(new Error('manifest not ok'))))
+            .then((list) => {
+              if (Array.isArray(list) && list.length) {
+                setItems(list);
+                setManifestLoaded(true);
+              }
+            })
+            .catch((err) => {
+              console.warn('Using default items (manifest not loaded):', err?.message || err);
+            });
+          return () => controller.abort();
+        }, []);
+
+        const handleFolderImport = (files) => {
+          const list = Array.from(files).filter(f => /\.(png|jpg|jpeg|webp|avif)$/i.test(f.name));
+          if (!list.length) return;
+          const typeMap = ['crown','amulet','weapon','sword','axe','bow','dagger','blade'];
+          const mapped = list.map((f) => {
+            const base = f.name.replace(/\.[^.]+$/, '');
+            const lower = base.toLowerCase();
+            let type = 'weapon';
+            for (const key of typeMap) { if (lower.includes(key)) { type = (key==='sword'||key==='axe'||key==='bow'||key==='dagger'||key==='blade') ? 'weapon' : key; break; } }
+            const id = base.replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase();
+            return {
+              id,
+              name: base.replace(/_/g, ' '),
+              type,
+              file: f.name,
+              fileUrl: URL.createObjectURL(f),
+            };
+          });
+          setItems(mapped);
+          setManifestLoaded(true);
+        };
+
+        const clearAll = () => {
+          setSlot('crown', null);
+          setSlot('amulet', null);
+          setSlot('weapon1', null);
+          setSlot('weapon2', null);
+        };
+
+        return (
+          <div className="app">
+            <div className="panel">
+              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', gap:8}}>
+                <h2 style={{margin:0}}>Loadout</h2>
+                <button className="filter-btn" onClick={clearAll} title="Clear all slots">Clear All</button>
+              </div>
+              <div className="slots">
+                <Slot slotId="crown" label="Crown" item={slots.crown} onClear={clearSlot} isCompatible={hoveredType === 'crown'} />
+                <Slot slotId="amulet" label="Amulet" item={slots.amulet} onClear={clearSlot} isCompatible={hoveredType === 'amulet'} />
+                <Slot slotId="weapon1" label="Weapon 1" item={slots.weapon1} onClear={clearSlot} isCompatible={hoveredType === 'weapon'} />
+                <Slot slotId="weapon2" label="Weapon 2" item={slots.weapon2} onClear={clearSlot} isCompatible={hoveredType === 'weapon'} />
+              </div>
+            </div>
+            <div className="panel">
+              <h2>Item Preview</h2>
+              <div className="help">Click an item in the catalog to equip. If both weapon slots are filled, the first weapon will be replaced.</div>
+              {!manifestLoaded && (
+                <div className="help" style={{marginTop:8}}>
+                  Tip: If local images or manifest aren’t loading, run a local server. For example:
+                  <code style={{marginLeft:6}}>npx serve</code>
+                </div>
+              )}
+              <div className="import" style={{marginTop:10}}>
+                <label htmlFor="folderInput" className="filter-btn" role="button">Import images folder</label>
+                <input id="folderInput" type="file" webkitdirectory="true" directory="true" onChange={(e) => handleFolderImport(e.target.files)} />
+                {importPath && <span className="path">{importPath}</span>}
+              </div>
+              <div style={{marginTop: 10}}>
+                <div className="item-chip" aria-hidden="true">
+                  <SmartImage item={{ id: 'example', img: 'https://images.unsplash.com/photo-1549888834-3ec93abae044?q=80&w=256&auto=format&fit=crop' }} size={40} radius={8} />
+                  <div>
+                    <div className="item-name">Example Item</div>
+                    <div className="item-type">type</div>
+                  </div>
+                  <span style={{color: '#8aa0b3', fontSize: 12}}>Preview</span>
+                </div>
+              </div>
+            </div>
+            <div className="panel">
+              <h2>Catalog</h2>
+              <Catalog items={items} filter={filter} setFilter={setFilter} onPick={addItem} onHoverType={setHoveredType} />
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+    <div class="footer">Unsplash placeholders used. Replace with Arkheron assets as needed.</div>
+  </body>
+</html>
+
+
