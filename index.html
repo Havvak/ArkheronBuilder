@@ -150,7 +150,20 @@
         { id: 'bow-tempest', name: 'Tempest Bow', type: 'weapon', img: 'https://images.unsplash.com/photo-1619034005683-f1500d2c7460?q=80&w=256&auto=format&fit=crop' },
       ];
 
-      function SmartImage({ item, size = 48, radius = 8 }) {
+      function findMatchingBacking(itemId, allItems) {
+        // Extract the EXX pattern from the item ID
+        const match = itemId.match(/e(\d+)/i);
+        if (!match) return null;
+        
+        const eNumber = match[1];
+        // Find backing item with matching EXX pattern
+        return allItems.find(backingItem => 
+          backingItem.type === 'backing' && 
+          backingItem.id.toLowerCase().includes(`e${eNumber}`)
+        );
+      }
+
+      function SmartImage({ item, size = 48, radius = 8, allItems = [] }) {
         const fallbacks = useMemo(() => {
           const dirs = ['images', 'Images', 'assets', 'Assets'];
           const exts = ['png', 'jpg', 'jpeg', 'webp', 'avif', 'PNG', 'JPG', 'JPEG', 'WEBP', 'AVIF'];
@@ -160,24 +173,77 @@
           const fileUrl = item.fileUrl ? [item.fileUrl] : [];
           return [...fileUrl, ...fromItemFile, ...fromId, ...remote];
         }, [item]);
+
+        const backingFallbacks = useMemo(() => {
+          const backing = findMatchingBacking(item.id, allItems);
+          if (!backing) return [];
+          
+          const dirs = ['images', 'Images', 'assets', 'Assets'];
+          const exts = ['png', 'jpg', 'jpeg', 'webp', 'avif', 'PNG', 'JPG', 'JPEG', 'WEBP', 'AVIF'];
+          const fromItemFile = backing.file ? dirs.flatMap((d) => [`${d}/${backing.file}`]) : [];
+          const fromId = dirs.flatMap((d) => exts.map((ext) => `${d}/${backing.id}.${ext}`));
+          const remote = backing.img ? [backing.img] : [];
+          const fileUrl = backing.fileUrl ? [backing.fileUrl] : [];
+          return [...fileUrl, ...fromItemFile, ...fromId, ...remote];
+        }, [item.id, allItems]);
+
         const [index, setIndex] = useState(0);
+        const [backingIndex, setBackingIndex] = useState(0);
+        
         const src = fallbacks[Math.min(index, fallbacks.length - 1)];
+        const backingSrc = backingFallbacks[Math.min(backingIndex, backingFallbacks.length - 1)];
+        const hasBacking = backingFallbacks.length > 0;
+
         return (
-          <img
-            src={src}
-            alt=""
-            width={size}
-            height={size}
-            style={{ width: size, height: size, borderRadius: radius, objectFit: 'cover' }}
-            onError={() => {
-              const next = index + 1;
-              if (next < fallbacks.length) {
-                // Simple diagnostic to help trace missing paths during development
-                console.warn('Image not found, trying next candidate', { tried: src, next: fallbacks[next] });
-                setIndex(next);
-              }
-            }}
-          />
+          <div style={{ position: 'relative', width: size, height: size }}>
+            {hasBacking && (
+              <img
+                src={backingSrc}
+                alt=""
+                width={size}
+                height={size}
+                style={{ 
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: size, 
+                  height: size, 
+                  borderRadius: radius, 
+                  objectFit: 'cover',
+                  zIndex: 1
+                }}
+                onError={() => {
+                  const next = backingIndex + 1;
+                  if (next < backingFallbacks.length) {
+                    setBackingIndex(next);
+                  }
+                }}
+              />
+            )}
+            <img
+              src={src}
+              alt=""
+              width={size}
+              height={size}
+              style={{ 
+                position: hasBacking ? 'absolute' : 'relative',
+                top: 0,
+                left: 0,
+                width: size, 
+                height: size, 
+                borderRadius: radius, 
+                objectFit: 'cover',
+                zIndex: hasBacking ? 2 : 1
+              }}
+              onError={() => {
+                const next = index + 1;
+                if (next < fallbacks.length) {
+                  console.warn('Image not found, trying next candidate', { tried: src, next: fallbacks[next] });
+                  setIndex(next);
+                }
+              }}
+            />
+          </div>
         );
       }
 
@@ -207,7 +273,7 @@
         return { slots, addItem, setSlot, clearSlot };
       }
 
-      function Slot({ slotId, label, item, onClear, isCompatible }) {
+      function Slot({ slotId, label, item, onClear, isCompatible, allItems }) {
         const isEmpty = !item;
         return (
           <div className={"slot" + (isCompatible ? " compatible" : "")} aria-live="polite">
@@ -229,7 +295,7 @@
                 <div className="slot-empty">Empty</div>
               ) : (
                 <div className="item-chip">
-                  <SmartImage item={item} size={40} radius={8} />
+                  <SmartImage item={item} size={40} radius={8} allItems={allItems} />
                   <div>
                     <div className="item-name">{item.name}</div>
                     <div className="item-type">{item.type}</div>
@@ -242,11 +308,14 @@
         );
       }
 
-      function Catalog({ items, filter, setFilter, onPick, onHoverType }) {
+      function Catalog({ items, filter, setFilter, onPick, onHoverType, allItems }) {
         const visible = useMemo(() => {
-          if (filter === 'all') return items;
-          if (filter === 'weapons') return items.filter((i) => i.type === 'weapon');
-          return items.filter((i) => i.type === filter);
+          // Filter out backing items - they should not be selectable
+          const selectableItems = items.filter((i) => i.type !== 'backing');
+          
+          if (filter === 'all') return selectableItems;
+          if (filter === 'weapons') return selectableItems.filter((i) => i.type === 'weapon');
+          return selectableItems.filter((i) => i.type === filter);
         }, [items, filter]);
 
         return (
@@ -270,7 +339,7 @@
                   onMouseEnter={() => onHoverType(item.type)}
                   onMouseLeave={() => onHoverType(null)}
                 >
-                  <SmartImage item={item} size={48} radius={8} />
+                  <SmartImage item={item} size={48} radius={8} allItems={allItems} />
                   <div className="item-meta">
                     <div className="item-name">{item.name}</div>
                     <div className="item-type">{item.type}</div>
@@ -345,10 +414,10 @@
                 <button className="filter-btn" onClick={clearAll} title="Clear all slots">Clear All</button>
               </div>
               <div className="slots">
-                <Slot slotId="crown" label="Crown" item={slots.crown} onClear={clearSlot} isCompatible={hoveredType === 'crown'} />
-                <Slot slotId="amulet" label="Amulet" item={slots.amulet} onClear={clearSlot} isCompatible={hoveredType === 'amulet'} />
-                <Slot slotId="weapon1" label="Weapon 1" item={slots.weapon1} onClear={clearSlot} isCompatible={hoveredType === 'weapon'} />
-                <Slot slotId="weapon2" label="Weapon 2" item={slots.weapon2} onClear={clearSlot} isCompatible={hoveredType === 'weapon'} />
+                <Slot slotId="crown" label="Crown" item={slots.crown} onClear={clearSlot} isCompatible={hoveredType === 'crown'} allItems={items} />
+                <Slot slotId="amulet" label="Amulet" item={slots.amulet} onClear={clearSlot} isCompatible={hoveredType === 'amulet'} allItems={items} />
+                <Slot slotId="weapon1" label="Weapon 1" item={slots.weapon1} onClear={clearSlot} isCompatible={hoveredType === 'weapon'} allItems={items} />
+                <Slot slotId="weapon2" label="Weapon 2" item={slots.weapon2} onClear={clearSlot} isCompatible={hoveredType === 'weapon'} allItems={items} />
               </div>
             </div>
             <div className="panel">
@@ -378,7 +447,7 @@
             </div>
             <div className="panel">
               <h2>Catalog</h2>
-              <Catalog items={items} filter={filter} setFilter={setFilter} onPick={addItem} onHoverType={setHoveredType} />
+              <Catalog items={items} filter={filter} setFilter={setFilter} onPick={addItem} onHoverType={setHoveredType} allItems={items} />
             </div>
           </div>
         );
